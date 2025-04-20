@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="corte2.ViewForm.FormActors.AdicionarActors">
+
+
+    <StackPanel Margin="20">
+        <!-- Nota / Mensaje de acción -->
+        <TextBlock
+            Margin="0,0,0,15"
+            Foreground="blue"
+            FontStyle="Italic"
+            FontSize="14"
+            Text="Nota: informacion sobre boton"
+            HorizontalAlignment="Center" />
+
+        <!-- Campos -->
+        <TextBlock Margin="0 5">Código:</TextBlock>
+        <TextBox Name="CodigoTextBox" Watermark="Ingresa un Código" />
+
+        <TextBlock Margin="0 5">Nombre:</TextBlock>
+        <TextBox Name="NombreTextBox" Watermark="Ingresa un Nombre" />
+
+        <TextBlock Margin="0 5">Fecha de Nacimiento:</TextBlock>
+        <TextBox Name="NacimientoTextBox" Watermark="Ingresa una fecha" />
+        
+        <TextBlock Margin="0 5">URL IMDB:</TextBlock>
+        <TextBox Name="ImdbTextBox" Watermark="Ingrese un IMDB" />
+        
+        <TextBlock Margin="0 5">Nacionalidad:</TextBlock>
+        <TextBox Name="NacionalidadTextBox" Watermark="Ingrese una nacionalidad" />
+
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="20,20,0,0">
+            <Button Content="Guardar"
+                    Width="100"
+                    Height="40"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    CornerRadius="10"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="OnGuardarClick">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#45A049" />
+                    </Style>
+                </Button.Styles>
+            </Button>
+
+            <Button Content="Eliminar"
+                    Width="100"
+                    Height="40"
+                    Background="#F44336"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    CornerRadius="10"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="OnEliminarClick">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#D32F2F" />
+                    </Style>
+                </Button.Styles>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+
+
+</UserControl>
