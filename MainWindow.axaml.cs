@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Diagnostics;
@@ -15,19 +16,7 @@ namespace corte2
             DataContext = new MainViewModel();
         }
 
-        private void limpiarcelda(int row, int column)
-        {
-            object? elementosencelda;
-            elementosencelda = MyGrid.Children
-                .Where(el => Grid.GetRow(el) == row && Grid.GetColumn(el) == column)
-                .Tolist();
-
-            foreach (var elemento in elementosencelda)
-            {
-                MyGrid.Children.Remove(elemento);
-            }
-        }
-
+        
         // Al hacer clic en el botón Actors, se abrirá el menú emergente (Popup)
         private void OnActorsClick(object sender, RoutedEventArgs e)
         {
@@ -70,27 +59,39 @@ namespace corte2
             });
         }
 
-//   Metodos para cargar los formularios UserControl
-        private void OnActorAddClick(object sender, RoutedEventArgs e)
+//   Métodos para cargar los formularios UserControl
+
+        private void CargarFormularios(UserControl form)
         {
-            var formulario = new AdicionarActors();
-            var formularioContainer = this.FindControl<Grid>("FormActorAdd")!;
+            var formulario = form;
+            var formularioContainer = this.FindControl<Grid>("Formularios")!;
             formularioContainer.Children.Clear();
             formularioContainer.Children.Add(formulario);
+            
         }
-
+        private void OnActorAddClick(object sender, RoutedEventArgs e)
+        {
+           CargarFormularios(new AdicionarActors());
+        }
 
         private void OnActorsEditClick(object? sender, RoutedEventArgs e)
         {
-            var formulario = new EditarActors();
-            var formularioContainer = this.FindControl<Grid>("FormActorEdit")!;
-            formularioContainer.Children.Clear();
-            formularioContainer.Children.Add(formulario);
+            CargarFormularios(new EditarActors());
         }
 
         private void OnInfoClick(object? sender, RoutedEventArgs e)
         {
             //
+        }
+
+        private void OnActorsBorrarClic(object? sender, RoutedEventArgs e)
+        {
+            CargarFormularios(new BorrarActors());
+        }
+
+        private void OnActorsDetalleClick(object? sender, RoutedEventArgs e)
+        {
+            CargarFormularios(new DetalleActors());
         }
     }
 }

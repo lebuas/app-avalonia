@@ -175,7 +175,7 @@
                         </Button>
 
                         <!-- Botón 3 -->
-                        <Button x:Name="OnActorsBorrar" Width="80" Height="80" Background="Transparent">
+                        <Button Click="OnActorsBorrarClic" Width="80" Height="80" Background="Transparent">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                 <Image Source="avares://corte2/Assets/borrar.png" Width="40" Height="40" />
                                 <TextBlock Foreground="White" Text="Borrar" HorizontalAlignment="Center" Margin="5" />
@@ -183,10 +183,10 @@
                         </Button>
 
                         <!-- Botón 4 -->
-                        <Button x:Name="OnActorsBuscar" Width="80" Height="80" Background="Transparent">
+                        <Button Click="OnActorsDetalleClick" Width="80" Height="80" Background="Transparent">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                 <Image Source="avares://corte2/Assets/buscar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Buscar" HorizontalAlignment="Center" Margin="5" />
+                                <TextBlock Foreground="White" Text="Detalle" HorizontalAlignment="Center" Margin="5" />
                             </StackPanel>
                         </Button>
 
@@ -271,6 +271,8 @@
                 </Border>
             </Grid>
         </Grid>
+        
+        <!-- Home-->
 
         <Grid Grid.Column="1"
               Grid.ColumnSpan="2"
@@ -304,25 +306,14 @@
 
 
         <!--
-         Carga de formulario de Actors
-         Crear un grid, y dentro del grid carga el UserControl que contiene el formulario
-         que se posiciona en la celda 1,2 del grid principal-->
+         Carga de formulario de Actors y Series
+         Crear un grid, y dentro del grid carga los UserControl dentro ViewForms que contienen las vista de formularios
+         que se Posicionan en la celda 1,2 del grid principal-->
 
         <!-- carga el formulario de adicionar actores -->
-        <Grid Grid.Column="2" Grid.Row="1" x:Name="FormActorAdd">
-        </Grid>
-
-        <!-- carga el formulario de editar actores -->
-        <Grid Grid.Column="2" Grid.Row="1" x:Name="FormActorEdit">
-        </Grid>
-
-        <!-- carga el formulario de borrar actores -->
-        <Grid Grid.Column="2" Grid.Row="1" x:Name="FormActorClear">
+        <Grid Grid.Column="2" Grid.Row="1" x:Name="Formularios">
         </Grid>
         
-        <!-- carga el formulario de buscar actores -->
-        <Grid Grid.Column="2" Grid.Row="1" x:Name="FormActorSerch">
-        </Grid>
 
     </Grid>
 </Window>

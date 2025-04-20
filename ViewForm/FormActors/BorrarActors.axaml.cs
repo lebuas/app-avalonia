@@ -5,14 +5,14 @@ using Avalonia.Markup.Xaml;
 
 namespace corte2.ViewForm.FormActors;
 
-public partial class EditarActors : UserControl
+public partial class BorrarActors : UserControl
 {
-    public EditarActors()
+    public BorrarActors()
     {
         InitializeComponent();
     }
 
-    private void OnGuardarBuscar(object? sender, RoutedEventArgs e)
+    private void OnGuardarEliminar(object? sender, RoutedEventArgs e)
     {
         throw new System.NotImplementedException();
     }
