@@ -53,7 +53,7 @@ namespace corte2
         // Abre la página de Google en el navegador predeterminado
         private void GithubClick(object sender, RoutedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://www.google.com")
+            Process.Start(new ProcessStartInfo("https://github.com/lebuas")
             {
                 UseShellExecute = true // Es necesario para abrir el navegador
             });

@@ -23,14 +23,18 @@
         <TextBlock Margin="0 5">Nombre:</TextBlock>
         <TextBox Name="NombreTextBox" Watermark="Ingresa un Nombre" />
 
-        <TextBlock Margin="0 5">Fecha de Nacimiento:</TextBlock>
-        <TextBox Name="NacimientoTextBox" Watermark="Ingresa una fecha" />
+        <TextBlock Margin="0 5">Apellido:</TextBlock>
+        <TextBox Name="ApellidoTextBox" Watermark="Ingresa un apellido" />
+        
+        
+        <TextBlock Margin="0 5">Rol:</TextBlock>
+        <TextBox Name="RolTextBox" Watermark="Ingresa un  rol" />
         
         <TextBlock Margin="0 5">URL IMDB:</TextBlock>
         <TextBox Name="ImdbTextBox" Watermark="Ingrese un IMDB" />
         
-        <TextBlock Margin="0 5">Nacionalidad:</TextBlock>
-        <TextBox Name="NacionalidadTextBox" Watermark="Ingrese una nacionalidad" />
+        <TextBlock Margin="0 5">Edad:</TextBlock>
+        <TextBox Name="EdadlidadTextBox" Watermark="Ingrese una Edad" />
 
         <!-- Botones -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="20,20,0,0">

@@ -3,6 +3,7 @@ namespace corte2.Models;
 // Clase Actor
 public class Actor
 {
+    public int Codigo { get; set; }
     public string Nombre { get; set; }
     public string Apellido { get; set; }
     public string Rol { get; set; }
@@ -10,8 +11,9 @@ public class Actor
     public string Edad { get; set; }
 
     // Constructor para inicializar las propiedades
-    public Actor(string nombre, string apellido, string rol, string serie, string edad)
+    public Actor(int codigo, string nombre, string apellido, string rol, string serie, string edad)
     {
+        Codigo = codigo;
         Nombre = nombre;
         Apellido = apellido;
         Rol = rol;

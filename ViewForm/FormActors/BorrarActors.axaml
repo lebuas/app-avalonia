@@ -2,10 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:corte2="clr-namespace:corte2"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="corte2.ViewForm.FormActors.BorrarActors">
-   <StackPanel Margin="20">
 
+    <StackPanel Margin="20">
 
         <!-- Nota / Mensaje de acción -->
         <TextBlock
@@ -15,28 +16,28 @@
             FontSize="14"
             Text="Nota: informacion sobre boton"
             HorizontalAlignment="Center" />
-        
-            <TextBlock Margin="0 5">Buscar Código Actor:</TextBlock>
-            <TextBox Name="BuscarCodigoTextBox" Watermark="Ingresa un Código" />
 
-            <!-- Botones -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="20,20,0,0">
-                <Button Content="Eliminar"
-                        Width="100"
-                        Height="40"
-                        Background="MediumBlue"
-                        Foreground="White"
-                        FontWeight="Bold"
-                        CornerRadius="10"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Click="OnGuardarEliminar">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover">
-                            <Setter Property="Background" Value="#45A049" />
-                        </Style>
-                    </Button.Styles>
-                </Button>
-            </StackPanel>
+        <TextBlock Margin="0 5">Buscar Código Actor:</TextBlock>
+        <TextBox Name="ActorCodigoTextBox" Watermark="Ingresa un Código" />
+
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="20,20,0,0">
+            <Button Content="Eliminar"
+                    Width="100"
+                    Height="40"
+                    Background="MediumBlue"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    CornerRadius="10"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="OnGuardarEliminar">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#45A049" />
+                    </Style>
+                </Button.Styles>
+            </Button>
         </StackPanel>
+    </StackPanel>
 </UserControl>

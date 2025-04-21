@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:corte2"
+        xmlns:local="MainViewModel"
         x:Class="corte2.MainWindow"
         x:DataType="vm:MainViewModel"
         x:CompileBindings="True"
@@ -16,7 +17,7 @@
     <Window.Styles>
         <StyleInclude Source="avares://corte2/ViewForm/Stylegrid.axaml" />
     </Window.Styles>
-
+    
     <Grid x:Name="MyGrid">
         <!-- Definir dos filas y tres columnas -->
         <Grid.RowDefinitions>
@@ -103,10 +104,13 @@
                   Grid.Row="0"
                   Grid.RowSpan="2"
                   IsVisible="False"
+                  IsReadOnly = "True"
+                  CanUserSortColumns="False"
                   ItemsSource="{Binding Actores}">
 
 
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
                 <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" />
                 <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" />
@@ -271,7 +275,7 @@
                 </Border>
             </Grid>
         </Grid>
-        
+
         <!-- Home-->
 
         <Grid Grid.Column="1"
@@ -313,7 +317,7 @@
         <!-- carga el formulario de adicionar actores -->
         <Grid Grid.Column="2" Grid.Row="1" x:Name="Formularios">
         </Grid>
-        
+
 
     </Grid>
 </Window>
