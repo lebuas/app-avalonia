@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="500"
              x:Class="corte2.ViewForm.FormActors.AdicionarActors">
 
 
@@ -25,14 +25,14 @@
 
         <TextBlock Margin="0 5">Apellido:</TextBlock>
         <TextBox Name="ApellidoTextBox" Watermark="Ingresa un apellido" />
-        
-        
+
+
         <TextBlock Margin="0 5">Rol:</TextBlock>
         <TextBox Name="RolTextBox" Watermark="Ingresa un  rol" />
-        
+
         <TextBlock Margin="0 5">URL IMDB:</TextBlock>
         <TextBox Name="ImdbTextBox" Watermark="Ingrese un IMDB" />
-        
+
         <TextBlock Margin="0 5">Edad:</TextBlock>
         <TextBox Name="EdadlidadTextBox" Watermark="Ingrese una Edad" />
 

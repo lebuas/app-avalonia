@@ -3,7 +3,6 @@ using Avalonia.Interactivity;
 using System;
 using System.Linq;
 using corte2.Models;
-
 namespace corte2.ViewForm.FormActors;
 
 public partial class AdicionarActors : UserControl

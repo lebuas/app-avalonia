@@ -9,15 +9,17 @@
         x:CompileBindings="True"
         Background="#c43a4c60"
         mc:Ignorable="d"
-        d:DesignWidth="1600"
-        d:DesignHeight="850"
+        Width="1100"
+        Height="850"
+        CornerRadius="5"
         Title="corte2">
+
 
     <!-- Cargar estilos solo si es necesario -->
     <Window.Styles>
         <StyleInclude Source="avares://corte2/ViewForm/Stylegrid.axaml" />
     </Window.Styles>
-    
+
     <Grid x:Name="MyGrid">
         <!-- Definir dos filas y tres columnas -->
         <Grid.RowDefinitions>
@@ -26,55 +28,57 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" /> <!-- Columna 1 (Menu) -->
+            <ColumnDefinition Width="65" /> <!-- Columna 1 (Menu) -->
             <ColumnDefinition Width="*" />  <!-- Columna 2 (DataGrid) -->
-            <ColumnDefinition Width="500" /> <!-- Columna 3 (Contenedores dinámicos) -->
         </Grid.ColumnDefinitions>
 
         <!-- Panel lateral (Columna 0, Fila 1 y 2) -->
         <DockPanel Background="#0b131c" Grid.Column="0" Grid.RowSpan="2">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="15" DockPanel.Dock="Top">
                 <!-- Botón Home -->
-                <Button Background="Transparent" BorderThickness="0" Width="80" Height="80"
+                <Button Background="Transparent" BorderThickness="0" Width="65" Height="65"
                         Click="OnHomeClik">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="avares://corte2/Assets/home.png" Width="40" Height="40" />
-                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Home" Margin="5" />
+                        <Image Source="avares://corte2/Assets/home.png" Width="25" Height="25" />
+                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Home" />
                     </StackPanel>
                 </Button>
 
+                <!-- Espaciador -->
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="65" />
+
                 <!-- Botón Actors -->
-                <Button x:Name="ActorsButton" Background="Transparent" BorderThickness="0" Width="80" Height="80"
+                <Button x:Name="ActorsButton" Background="Transparent" BorderThickness="0" Width="65" Height="65"
                         Click="OnActorsClick">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="avares://corte2/Assets/actors.png" Width="40" Height="40" />
-                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Actors" Margin="5" />
+                        <Image Source="avares://corte2/Assets/actors.png" Width="25" Height="25" />
+                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Actors" />
                     </StackPanel>
                 </Button>
 
                 <!-- Botón Series -->
-                <Button x:Name="SeriesButton" Background="Transparent" BorderThickness="0" Width="80" Height="80"
+                <Button x:Name="SeriesButton" Background="Transparent" BorderThickness="0" Width="65" Height="65"
                         Click="OnSeriesClick">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="avares://corte2/Assets/series.png" Width="40" Height="40" />
-                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Series" Margin="5" />
+                        <Image Source="avares://corte2/Assets/series.png" Width="25" Height="25" />
+                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Series" />
                     </StackPanel>
                 </Button>
 
                 <!-- Botón Salir -->
-                <Button Click="OnExitClick" Background="Transparent" BorderThickness="0" Width="80" Height="80">
+                <Button Click="OnExitClick" Background="Transparent" BorderThickness="0" Width="65" Height="65">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="avares://corte2/Assets/salir.png" Width="40" Height="40" />
-                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Salir" Margin="5" />
+                        <Image Source="avares://corte2/Assets/salir.png" Width="25" Height="25" />
+                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Salir" />
                     </StackPanel>
                 </Button>
 
 
                 <!-- Button información -->
-                <Button Click="OnInfoClick" Background="Transparent" BorderThickness="0" Width="80" Height="80">
+                <Button Click="OnInfoClick" Background="Transparent" BorderThickness="0" Width="65" Height="65">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="avares://corte2/Assets/info.png" Width="40" Height="40" />
-                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Info" Margin="5" />
+                        <Image Source="avares://corte2/Assets/info.png" Width="25" Height="25" />
+                        <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Info" />
                     </StackPanel>
                 </Button>
 
@@ -84,11 +88,11 @@
             <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
             <!-- Botón GitHub abajo -->
-            <Button Click="GithubClick" Background="Transparent" BorderThickness="0" Width="80" Height="80"
+            <Button Click="GithubClick" Background="Transparent" BorderThickness="0" Width="65" Height="65"
                     DockPanel.Dock="Bottom">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Image Source="avares://corte2/Assets/github.png" Width="40" Height="40" />
-                    <TextBlock Foreground="White" HorizontalAlignment="Center" Text="GitHub" Margin="5" />
+                    <Image Source="avares://corte2/Assets/github.png" Width="25" Height="25" />
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" Text="GitHub" />
                 </StackPanel>
             </Button>
 
@@ -98,49 +102,119 @@
 
 
         <!--data grid para actores -->
-
         <DataGrid Name="DataGridActores"
                   Grid.Column="1"
-                  Grid.Row="0"
-                  Grid.RowSpan="2"
-                  IsVisible="False"
-                  IsReadOnly = "True"
+                  Grid.Row="1"
+                  IsVisible="True"
+                  IsReadOnly="True"
+                  Focusable="False"
                   CanUserSortColumns="False"
-                  ItemsSource="{Binding Actores}">
-
+                  ItemsSource="{Binding Actores}"
+                  AutoGenerateColumns="False"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" />
-                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" />
-                <DataGridTextColumn Header="Serie" Binding="{Binding Serie}" />
-                <DataGridTextColumn Header="Edad" Binding="{Binding Edad}" />
+
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="*" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="*" />
+                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*" />
+                <DataGridTextColumn Header="Serie" Binding="{Binding Serie}" Width="*" />
+                <DataGridTextColumn Header="Edad" Binding="{Binding Edad}" Width="*" />
+
+                <!-- Columna con boton editar -->
+                <DataGridTemplateColumn Header="Editar" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+
+                                <!-- Botón Editar -->
+                                <Button Background="Transparent" Click="Editar_Actor_Click">
+                                    <Image Source="avares://corte2/Assets/editar.png" Width="16" Height="16" />
+                                </Button>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Eliminar" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                                <!-- Botón Eliminar -->
+                                <Button Background="Transparent" Click="Eliminar_Actor_Click">
+                                    <Image Source="avares://corte2/Assets/borrar.png" Width="16" Height="16" />
+                                </Button>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <!--data grid para actores -->
-
+        <!--data grid para serires "Falta camiar los eventos click"-->
         <DataGrid Name="DataGridSeries"
                   Grid.Column="1"
-                  Grid.Row="0"
-                  Grid.RowSpan="2"
-                  IsVisible="False"
-                  ItemsSource="{Binding Series}">
-
+                  Grid.Row="1"
+                  IsVisible="True"
+                  IsReadOnly="True"
+                  Focusable="False"
+                  CanUserSortColumns="False"
+                  ItemsSource="{Binding Series}"
+                  AutoGenerateColumns="False"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" />
-                <DataGridTextColumn Header="Genero" Binding="{Binding Genero}" />
-                <DataGridTextColumn Header="Año" Binding="{Binding Año}" />
-                <DataGridTextColumn Header="Plataforma" Binding="{Binding Plataforma}" />
-                <DataGridTextColumn Header="Temporada" Binding="{Binding Temporadas}" />
+
+                <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" Width="*" />
+                <DataGridTextColumn Header="Genero" Binding="{Binding Genero}" Width="*" />
+                <DataGridTextColumn Header="Año" Binding="{Binding Año}" Width="*" />
+                <DataGridTextColumn Header="Plataforma" Binding="{Binding Plataforma}" Width="*" />
+                <DataGridTextColumn Header="Temporada" Binding="{Binding Temporadas}" Width="*" />
+
+                <!-- Columnas con boton editar y eliminar del datagrid -->
+                <DataGridTemplateColumn Header="Editar" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+
+                                <!-- Botón Editar -->
+                                <Button Background="Transparent" Click="Editar_Actor_Click">
+                                    <Image Source="avares://corte2/Assets/editar.png" Width="16" Height="16" />
+                                </Button>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Eliminar" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                                <!-- Botón Eliminar -->
+                                <Button Background="Transparent" Click="Eliminar_Actor_Click">
+                                    <Image Source="avares://corte2/Assets/borrar.png" Width="16" Height="16" />
+                                </Button>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--opciones para actores dentro de un grid de dos filas-->
-        <Grid Grid.Row="0" Grid.Column="2" RowDefinitions="40,*" x:Name="GridActors" IsVisible="False">
+
+        <!--opciones para actores-->
+        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="40,*" x:Name="GridActors" IsVisible="False">
+
+            <!-- Texto de las opciones-->
+
             <Border Grid.Row="0" Background="#0b131c">
                 <StackPanel>
                     <TextBlock Text="Opciones para Actores"
@@ -154,59 +228,116 @@
                 </StackPanel>
             </Border>
 
+            <!--Botones e interaciones de las opcines-->
 
             <Grid Grid.Row="1" Background="#0b131c">
-                <Border Width="500" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Spacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                        <!-- Botón 1 -->
-                        <Button Click="OnActorAddClick" Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/adicionar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Adicionar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                <!-- Sección izquierda: Buscador -->
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            Spacing="10"
+                            Margin="10,0">
 
-                        <!-- Botón 2 -->
+                    <TextBox x:Name="BuscarActor"
+                             Width="180"
+                             Height="36"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Watermark="Ingrese Código Actor"
+                             Background="#1E1E1E"
+                             Foreground="White"
+                             BorderBrush="Gray"
+                             BorderThickness="1"
+                             CornerRadius="20"
+                             Padding="10,0" />
 
-                        <Button Click="OnActorsEditClick" Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/editar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Editar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                    <Button Width="110"
+                            Height="36"
+                            Background="Transparent"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="18"
+                            Padding="10,0"
+                            Click="Buscar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                            <Image Source="avares://corte2/Assets/buscar.png" Width="16" Height="16" />
+                            <TextBlock Text="Buscar" Foreground="White" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
 
-                        <!-- Botón 3 -->
-                        <Button Click="OnActorsBorrarClic" Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/borrar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Borrar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                    <!-- Botón Detalle -->
+                    <Button Width="120"
+                            Height="40"
+                            Background="Transparent"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Detalle_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/detalle.png" Width="20" Height="20" />
+                            <TextBlock Text="Detalle" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
 
-                        <!-- Botón 4 -->
-                        <Button Click="OnActorsDetalleClick" Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/buscar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Detalle" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                <!-- Sección derecha: Botones -->
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="10"
+                            Margin="10,0">
 
-                    </StackPanel>
-                </Border>
+                    <!-- Botón Bloquea edicion -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="LightGreen"
+                            BorderThickness="2"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            IsVisible="False"
+                            x:Name="ButtonBloquearEdicionActores"
+                            Click="Bloquear_Edicion_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/Actualizar.png" Width="20" Height="20" />
+                            <TextBlock Text="Actualizar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Botón Adicionar -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Adicionar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/adicionar.png" Width="20" Height="20" />
+                            <TextBlock Text="Adicionar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
+
         </Grid>
 
 
-        <!--opciones para series dentro de un grid de dos filas-->
+        <!--opciones para series-->
 
-        <Grid Grid.Row="0" Grid.Column="2" RowDefinitions="40,*" x:Name="GridSeries" IsVisible="False">
-            <!-- Encabezado bonito -->
+        <!--opciones para actores-->
+        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="40,*" x:Name="GridSeries" IsVisible="False">
+
+            <!-- Texto de las opciones-->
+
             <Border Grid.Row="0" Background="#0b131c">
                 <StackPanel>
-                    <TextBlock Text="Opciones para series"
+                    <TextBlock Text="Opciones para Actores"
                                Foreground="White"
                                FontSize="18"
                                FontWeight="Bold"
@@ -217,73 +348,138 @@
                 </StackPanel>
             </Border>
 
+            <!--Botones e interaciones de las opcines-->
 
             <Grid Grid.Row="1" Background="#0b131c">
-                <Border Width="500" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Spacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                        <!-- Botón 1 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/adicionar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Adicionar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                <!-- Sección izquierda: Buscador -->
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            Spacing="10"
+                            Margin="10,0">
 
-                        <!-- Botón 2 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/editar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Editar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                    <TextBox x:Name="BuscarSerie"
+                             Width="180"
+                             Height="36"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Watermark="Ingrese Código Actor"
+                             Background="#1E1E1E"
+                             Foreground="White"
+                             BorderBrush="Gray"
+                             BorderThickness="1"
+                             CornerRadius="20"
+                             Padding="10,0" />
 
-                        <!-- Botón 3 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/generic.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Borrar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                    <Button Width="110"
+                            Height="36"
+                            Background="Transparent"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="18"
+                            Padding="10,0"
+                            Click="Buscar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                            <Image Source="avares://corte2/Assets/buscar.png" Width="16" Height="16" />
+                            <TextBlock Text="Buscar" Foreground="White" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
 
-                        <!-- Botón 4 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/detalle.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Detalle" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                    <!-- Botón Detalle -->
+                    <Button Width="120"
+                            Height="40"
+                            Background="Transparent"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Detalle_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/detalle.png" Width="20" Height="20" />
+                            <TextBlock Text="Detalle" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
 
-                        <!-- Botón 5 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/asociar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Asociar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
+                <!-- Espaciador para correr los botones -->
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="10"
+                            Margin="10,0">
 
-                        <!-- Botón 6 -->
-                        <Button Width="80" Height="80" Background="Transparent">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <Image Source="avares://corte2/Assets/disociar.png" Width="40" Height="40" />
-                                <TextBlock Foreground="White" Text="Disociar" HorizontalAlignment="Center" Margin="5" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Border>
+                    <!-- Botón Bloquea edicion -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="LightGreen"
+                            BorderThickness="2"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            IsVisible="False"
+                            x:Name="ButtonBloquearEdicionSeries"
+                            Click="Bloquear_Edicion_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/Actualizar.png" Width="20" Height="20" />
+                            <TextBlock Text="Actualizar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Botón Adicionar -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Adicionar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/adicionar.png" Width="20" Height="20" />
+                            <TextBlock Text="Adicionar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Botón Asociar -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Adicionar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/asociar.png" Width="20" Height="20" />
+                            <TextBlock Text="Asociar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    
+                    <!-- Botón Disociar -->
+                    <Button Width="120" Height="40" Background="Transparent" BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="20"
+                            Padding="10,5"
+                            Click="Adicionar_Actor_Click">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Spacing="8">
+                            <Image Source="avares://corte2/Assets/disociar.png" Width="20" Height="20" />
+                            <TextBlock Text="Disociar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
+
         </Grid>
 
-        <!-- Home-->
 
+        <!-- Home-->
         <Grid Grid.Column="1"
-              Grid.ColumnSpan="2"
               Grid.Row="0"
               Grid.RowSpan="2"
               Name="Home"
-              Background="Black">
+              Background="#12181f">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -303,21 +499,9 @@
             <Image Grid.Row="1" Source="avares://corte2/Assets/home.jpg"
                    Width="400" Height="400" HorizontalAlignment="Center" Margin="0,155">
                 <Image.Clip>
-                    <EllipseGeometry Rect="0,0,400,400" />
+                    <EllipseGeometry Rect="0,0,600,600" />
                 </Image.Clip>
             </Image>
         </Grid>
-
-
-        <!--
-         Carga de formulario de Actors y Series
-         Crear un grid, y dentro del grid carga los UserControl dentro ViewForms que contienen las vista de formularios
-         que se Posicionan en la celda 1,2 del grid principal-->
-
-        <!-- carga el formulario de adicionar actores -->
-        <Grid Grid.Column="2" Grid.Row="1" x:Name="Formularios">
-        </Grid>
-
-
     </Grid>
 </Window>

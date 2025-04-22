@@ -3,10 +3,10 @@
 
     <!-- Estilo para el DataGrid -->
     <Style Selector="DataGrid">
-        <Setter Property="Background" Value="#f0f0f0" /> <!-- Fondo gris claro -->
+        <Setter Property="Background" Value="#12181f" /> <!-- Fondo gris claro -->
         <Setter Property="BorderBrush" Value="Transparent" /> <!-- Sin bordes -->
         <Setter Property="BorderThickness" Value="0" /> <!-- Sin bordes -->
-        <Setter Property="RowHeight" Value="30" /> <!-- Fila más delgada -->
+        <Setter Property="RowHeight" Value="27" /> <!-- Fila más delgada -->
     </Style>
 
     <!-- Estilo para el encabezado del DataGrid -->
@@ -21,35 +21,22 @@
 
     <!-- Estilo para las filas del DataGrid -->
     <Style Selector="DataGridRow">
-        <Setter Property="Background" Value="#f0f0f0" /> <!-- Fondo gris claro -->
-        <Setter Property="Foreground" Value="#0b131c" />
-        <Setter Property="BorderBrush" Value="#d3d3d3" /> <!-- color del Separador de fila-->
+        <Setter Property="Background" Value="#12181f" /> <!-- Fondo gris claro -->
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="#293645" /> <!-- color del Separador de fila-->
         <Setter Property="BorderThickness" Value="0,0,0,1" /> <!-- Línea separadora -->
     </Style>
+    
 
-    <!-- Estilo para las celdas del DataGrid -->
-    <Style Selector="DataGridCell">
-        <Setter Property="Padding" Value="10" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" /> <!-- Alineación centrada de las celdas -->
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="#e5e5e5" /> <!-- Celdas con fondo gris claro -->
-    </Style>
-
-    <!--~1~ Estilo para las celdas seleccionadas @1@
-    <Style Selector="DataGridCell:focus">
-        <Setter Property="Background" Value="#c43a4c60" /> ~1~ Fondo cuando está en foco @1@
-        <Setter Property="Foreground" Value="White" />
-    </Style>
-
-    ~1~ Estilo para la fila seleccionada @1@
+    <!-- ~1~ Estilo para la fila seleccionada @1@ -->
     <Style Selector="DataGridRow:selected">
-        <Setter Property="Background" Value="#c43a4c60" /> ~1~ Fondo cuando está seleccionada @1@
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Red" /> <!--~2~ Fondo cuando está seleccionada @2@-->
+        <Setter Property="Foreground" Value="Black" />
     </Style>
 
-    ~1~ Estilo para cuando el cursor pasa sobre una fila (sin seleccionar una celda específica) @1@
-    <Style Selector="DataGridRow:hover">
-        <Setter Property="Background" Value="Green" /> ~1~ Fondo más oscuro para el hover sobre la fila @1@
-    </Style>-->
+    <!--~2~ Estilo para cuando el cursor pasa sobre una fila (sin seleccionar una celda específica) @2@-->
+    <Style Selector="DataGridRow:pointerover">
+        <Setter Property="Background" Value="#475f78" /> <!--~2~ Fondo más oscuro para el hover sobre la fila @2@-->
+    </Style>
 
 </Styles>
