@@ -6,8 +6,9 @@ using System.Linq;
 using corte2.Models;
 using corte2.ViewForm;
 using System.Collections.Generic;
-using Avalonia.VisualTree;
 using corte2.ViewForm.FormActors;
+using MsBox.Avalonia;
+
 
 namespace corte2
 {
@@ -31,6 +32,7 @@ namespace corte2
             GridActors.IsVisible = true;
         }
 
+
         private void OnSeriesClick(object sender, RoutedEventArgs e)
         {
             // Mostrar las opciones de series y ocultar las de actores
@@ -40,6 +42,7 @@ namespace corte2
             DataGridSeries.IsVisible = true;
             GridSeries.IsVisible = true;
         }
+
 
         private void OnHomeClik(object? sender, RoutedEventArgs e)
         {
@@ -62,20 +65,22 @@ namespace corte2
             });
         }
 
-//   Métodos para cargar los formularios UserControl de interaciones con Actores
 
-        private void CargarFormularios(UserControl form)
+//   Métodos para cargar los formularios UserControl de interaciones con Actores
+        ///
+        /*private void CargarFormularios(UserControl form)
         {
             var formulario = form;
             var formularioContainer = this.FindControl<Grid>("Formularios")!;
             formularioContainer.Children.Clear();
             formularioContainer.Children.Add(formulario);
-        }
-
+        }*/
         private void OnInfoClick(object? sender, RoutedEventArgs e)
         {
+            
             //
         }
+
 
         private void Editar_Actor_Click(object? sender, RoutedEventArgs e)
         {
@@ -84,13 +89,27 @@ namespace corte2
             ButtonBloquearEdicionActores.IsVisible = true;
         }
 
+        private void Editar_Serie_Click(object? sender, RoutedEventArgs e)
+        {
+            DataGridSeries.IsReadOnly = false;
+            DataGridSeries.Columns[0].IsReadOnly = true;
+            ButtonBloquearEdicionSeries.IsVisible = true;
+        }
+
         private void Bloquear_Edicion_Actor_Click(object? sender, RoutedEventArgs e)
         {
             DataGridActores.IsReadOnly = true;
             ButtonBloquearEdicionActores.IsVisible = false;
         }
+        
+        private void Bloquear_Edicion_Serie_Click(object? sender, RoutedEventArgs e)
+        {
+            DataGridSeries.IsReadOnly = true;
+            ButtonBloquearEdicionSeries.IsVisible = false;
+        }
 
-        private void Eliminar_Actor_Click(object sender, RoutedEventArgs e)
+
+        async void Eliminar_Actor_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.DataContext is Actor actor)
             {
@@ -98,37 +117,91 @@ namespace corte2
                 if (vm != null)
                 {
                     vm.Actores.Remove(actor);
-                    Console.WriteLine($"Actor eliminado: {actor.Nombre} {actor.Apellido}");
+                    var message = MessageBoxManager.GetMessageBoxStandard(
+                        "Title",
+                        ($"Actor: {actor.Codigo} - {actor.Nombre} {actor.Apellido} Eliminado")
+                    );
+                    await message.ShowAsync();
+                }
+            }
+        }
+
+        async void Eliminar_Serie_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is Serie serie)
+            {
+                var vm = this.DataContext as MainViewModel;
+                if (vm != null)
+                {
+                    vm.Series.Remove(serie);
+                    var message = MessageBoxManager.GetMessageBoxStandard(
+                        "Title",
+                        ($"Serie: {serie.Codigo} {serie.Titulo} Eliminado")
+                    );
+                    await message.ShowAsync();
                 }
             }
         }
 
 
-        private void Buscar_Actor_Click(object? sender, RoutedEventArgs e)
+        async void Buscar_Actor_Click(object? sender, RoutedEventArgs e)
         {
+            // Obtener el texto del TextBox
+            var vm = this.DataContext as MainViewModel;
+            string texto = GetCodigoActor.Text!;
+
+            //convertir el texto del TextBox a un número
+            if (int.TryParse(texto, out int codigo))
             {
-                // Obtener el texto del TextBox
-                var vm = this.DataContext as MainViewModel;
-                string texto = BuscarActor.Text!;
+                // Buscar el actor con el código especificado
+                var actor = vm!.Actores.FirstOrDefault(c => c.Codigo == codigo);
 
-                //convertir el texto del TextBox a un número
-                if (int.TryParse(texto, out int codigo))
+                if (actor != null)
                 {
-                    // Buscar el actor con el código especificado
-                    var actor = vm.Actores.FirstOrDefault(c => c.Codigo == codigo);
+                    vm.Actores.Remove(actor);
+                    vm.Actores.Insert(0, actor);
+                    var index = vm.Actores.IndexOf(actor);
+                    DataGridActores.SelectedIndex = index;
+                    GetCodigoActor.Text = "";
+                }
+                else
+                {
+                    var message = MessageBoxManager.GetMessageBoxStandard(
+                        "Title",
+                        "No se encontro el Actor"
+                    );
+                    await message.ShowAsync();
+                }
+            }
+        }
 
-                    if (actor != null)
-                    {
-                        vm.Actores.Remove(actor);
-                        vm.Actores.Insert(0, actor);
-                        var index = vm.Actores.IndexOf(actor);
-                        DataGridActores.SelectedIndex = index;
-                        BuscarActor.Text = "";
-                    }
-                    else
-                    {
-                        Console.WriteLine("No se encontró un actor con ese código.");
-                    }
+        async void Buscar_Serie_Click(object? sender, RoutedEventArgs e)
+        {
+            // Obtener el texto del TextBox
+            var vm = this.DataContext as MainViewModel;
+            string texto = GetCodigoSerie.Text!;
+
+            //convertir el texto del TextBox a un número
+            if (int.TryParse(texto, out int codigo))
+            {
+                // Buscar el actor con el código especificado
+                var Serie = vm.Series.FirstOrDefault(c => c.Codigo == codigo);
+
+                if (Serie != null)
+                {
+                    vm.Series.Remove(Serie);
+                    vm.Series.Insert(0, Serie);
+                    var index = vm.Series.IndexOf(Serie);
+                    DataGridSeries.SelectedIndex = index;
+                    GetCodigoSerie.Text = "";
+                }
+                else
+                {
+                    var message = MessageBoxManager.GetMessageBoxStandard(
+                        "Title",
+                        "No se encontró la Serie"
+                    );
+                    await message.ShowAsync();
                 }
             }
         }

@@ -25,6 +25,8 @@ public class Actor
 // Clase Serie
 public class Serie
 {
+    
+    public int Codigo { get; set; }
     public string Titulo { get; set; }
     public string Genero { get; set; }
     public string Año { get; set; }
@@ -32,8 +34,9 @@ public class Serie
     public string Temporadas { get; set; }
 
     // Constructor para inicializar las propiedades
-    public Serie(string titulo, string genero, string año, string plataforma, string temporadas)
+    public Serie(int codigo, string titulo, string genero, string año, string plataforma, string temporadas)
     {
+        Codigo = codigo;
         Titulo = titulo;
         Genero = genero;
         Año = año;

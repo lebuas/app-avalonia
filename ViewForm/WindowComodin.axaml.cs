@@ -19,4 +19,5 @@ public partial class WindowComodin : Window
         formularioContainer.Children.Clear();
         formularioContainer.Children.Add(formulario);
     }
+    
 }

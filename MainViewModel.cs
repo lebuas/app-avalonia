@@ -23,13 +23,13 @@ namespace corte2
 
         Series = new ObservableCollection<Serie>
         {
-            new Serie("Matrix", "Ciencia ficción", "1999", "Warner Bros", "3"),
-            new Serie("Breaking Bad", "Crimen", "2008", "AMC", "5")
+            new Serie(20, "Matrix", "Ciencia ficción", "1999", "Warner Bros", "3"),
+            new Serie(30, "Breaking Bad", "Crimen", "2008", "AMC", "5")
         };
 
         // Agregar un actor y una serie después de la inicialización
         Actores.Add(new Actor(15, "Tom", "Hanks", "Forrest Gump", "Forrest Gump", "65"));
-        Series.Add(new Serie("Stranger Things", "Ciencia ficción", "2016", "Netflix", "4"));
+        Series.Add(new Serie(20,"Stranger Things", "Ciencia ficción", "2016", "Netflix", "4"));
     }
     }
 }

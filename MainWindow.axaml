@@ -171,6 +171,7 @@
 
             <DataGrid.Columns>
 
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="*" />
                 <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" Width="*" />
                 <DataGridTextColumn Header="Genero" Binding="{Binding Genero}" Width="*" />
                 <DataGridTextColumn Header="Año" Binding="{Binding Año}" Width="*" />
@@ -184,7 +185,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
 
                                 <!-- Botón Editar -->
-                                <Button Background="Transparent" Click="Editar_Actor_Click">
+                                <Button Background="Transparent" Click="Editar_Serie_Click">
                                     <Image Source="avares://corte2/Assets/editar.png" Width="16" Height="16" />
                                 </Button>
 
@@ -198,7 +199,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
                                 <!-- Botón Eliminar -->
-                                <Button Background="Transparent" Click="Eliminar_Actor_Click">
+                                <Button Background="Transparent" Click="Eliminar_Serie_Click">
                                     <Image Source="avares://corte2/Assets/borrar.png" Width="16" Height="16" />
                                 </Button>
 
@@ -244,7 +245,7 @@
                             Spacing="10"
                             Margin="10,0">
 
-                    <TextBox x:Name="BuscarActor"
+                    <TextBox x:Name="GetCodigoActor"
                              Width="180"
                              Height="36"
                              HorizontalContentAlignment="Center"
@@ -329,8 +330,7 @@
 
 
         <!--opciones para series-->
-
-        <!--opciones para actores-->
+        
         <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="40,*" x:Name="GridSeries" IsVisible="False">
 
             <!-- Texto de las opciones-->
@@ -364,7 +364,7 @@
                             Spacing="10"
                             Margin="10,0">
 
-                    <TextBox x:Name="BuscarSerie"
+                    <TextBox x:Name="GetCodigoSerie"
                              Width="180"
                              Height="36"
                              HorizontalContentAlignment="Center"
@@ -384,7 +384,7 @@
                             BorderThickness="1"
                             CornerRadius="18"
                             Padding="10,0"
-                            Click="Buscar_Actor_Click">
+                            Click="Buscar_Serie_Click">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
                             <Image Source="avares://corte2/Assets/buscar.png" Width="16" Height="16" />
                             <TextBlock Text="Buscar" Foreground="White" VerticalAlignment="Center" />
@@ -422,7 +422,7 @@
                             Padding="10,5"
                             IsVisible="False"
                             x:Name="ButtonBloquearEdicionSeries"
-                            Click="Bloquear_Edicion_Actor_Click">
+                            Click="Bloquear_Edicion_Serie_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Spacing="8">
                             <Image Source="avares://corte2/Assets/Actualizar.png" Width="20" Height="20" />
