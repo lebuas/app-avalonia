@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="corte2.ViewForm.FormSeries.AsociarDisociarSerieActor">
+
+    <Grid RowDefinitions="Auto,*" Margin="20">
+
+        <!-- Primera fila: Formulario -->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
+
+            <!-- Fila: Código de Actor -->
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Código Actor:" VerticalAlignment="Center" />
+                <TextBox Width="200" Name="CodigoActorTextBox" />
+            </StackPanel>
+
+            <!-- Fila: Código de Serie -->
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Código Serie:" VerticalAlignment="Center" />
+                <TextBox Width="200" Name="CodigoSerieTextBox" />
+            </StackPanel>
+
+            <!-- Fila: Botones -->
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Click="AsociarSerieClick" Content="Asociar" Width="100" Background="Green" Foreground="White" />
+                <Button Click="DisociarSerieClick" Content="Disociar" Width="100" Background="Red" Foreground="White" />
+                <Button Click="Salir" Content="Salir" Width="100" Background="Blue" Foreground="White" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Segunda fila-->
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" x:Name="GetDataGridSeriesActores">
+        </Border>
+
+    </Grid>
+</UserControl>

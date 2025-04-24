@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Diagnostics;
@@ -6,7 +5,9 @@ using System.Linq;
 using corte2.Models;
 using corte2.ViewForm;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using corte2.ViewForm.FormActors;
+using corte2.ViewForm.FormSeries;
 using MsBox.Avalonia;
 
 
@@ -20,6 +21,12 @@ namespace corte2
             DataContext = new MainViewModel();
         }
 
+        // Metodo para enviar los mesajes flotantes
+        private async Task ShowMessage(string title, string message)
+        {
+            var box = MessageBoxManager.GetMessageBoxStandard(title, message);
+            await box.ShowAsync();
+        }
 
         // Al hacer clic en el botón Actors, se abrirá el menú emergente (Popup)
         private void OnActorsClick(object sender, RoutedEventArgs e)
@@ -65,19 +72,8 @@ namespace corte2
             });
         }
 
-
-//   Métodos para cargar los formularios UserControl de interaciones con Actores
-        ///
-        /*private void CargarFormularios(UserControl form)
-        {
-            var formulario = form;
-            var formularioContainer = this.FindControl<Grid>("Formularios")!;
-            formularioContainer.Children.Clear();
-            formularioContainer.Children.Add(formulario);
-        }*/
         private void OnInfoClick(object? sender, RoutedEventArgs e)
         {
-            
             //
         }
 
@@ -101,7 +97,7 @@ namespace corte2
             DataGridActores.IsReadOnly = true;
             ButtonBloquearEdicionActores.IsVisible = false;
         }
-        
+
         private void Bloquear_Edicion_Serie_Click(object? sender, RoutedEventArgs e)
         {
             DataGridSeries.IsReadOnly = true;
@@ -117,11 +113,7 @@ namespace corte2
                 if (vm != null)
                 {
                     vm.Actores.Remove(actor);
-                    var message = MessageBoxManager.GetMessageBoxStandard(
-                        "Title",
-                        ($"Actor: {actor.Codigo} - {actor.Nombre} {actor.Apellido} Eliminado")
-                    );
-                    await message.ShowAsync();
+                    await ShowMessage("Title", ($"Actor: {actor.Codigo} - {actor.Nombre} Eliminado"));
                 }
             }
         }
@@ -141,6 +133,19 @@ namespace corte2
                     await message.ShowAsync();
                 }
             }
+        }
+
+
+        async Task<int> ValidarCodigo(string texto)
+        {
+            if (int.TryParse(texto, out int codigo))
+            {
+                return codigo;
+            }
+
+
+            await ShowMessage("Error", "El Código tiene que ser un número.");
+            return -1;
         }
 
 
@@ -206,6 +211,7 @@ namespace corte2
             }
         }
 
+        // Abre la ventana Comodin que llama al UseControl que contiene el formulario
         private void Adicionar_Actor_Click(object? sender, RoutedEventArgs e)
         {
             var ventan = new WindowComodin(new AdicionarActors());
@@ -213,15 +219,65 @@ namespace corte2
             ventan.Show();
         }
 
-        private void Detalle_Actor_Click(object? sender, RoutedEventArgs e)
+
+        private void Adicionar_Serie_Click(object? sender, RoutedEventArgs e)
         {
-            var series = new List<string>
+            var ventana = new WindowComodin(new AdicionarSerie());
+            ventana.DataContext = this.DataContext;
+            ventana.Show();
+        }
+
+        private async void Detalle_Actor_Click(object? sender, RoutedEventArgs e)
+        {
+            var mv = DataContext as MainViewModel;
+
+            if (GetCodigoActor.Text != null)
             {
-                "Breaking Bad",
-                "Better Call Saul",
-                "The Mandalorian",
-                "The Last of Us"
-            };
+                var codigo = await ValidarCodigo(GetCodigoActor.Text);
+
+                if (codigo != -1)
+                {
+                    var listaSeries = mv.ActorTrabaja(codigo);
+                    string mensaje = string.Join("\n", listaSeries);
+                    GetCodigoSerie.Text = "";
+                    await ShowMessage("Information", mensaje);
+                }
+            }
+            else
+            {
+                await ShowMessage("Error", "Ingrese un codigo");
+            }
+        }
+
+        private async void Detalle_Serie_Click(object? sender, RoutedEventArgs e)
+
+        {
+            var mv = DataContext as MainViewModel;
+
+            if (GetCodigoSerie.Text != null)
+            {
+                var codigo = await ValidarCodigo(GetCodigoSerie.Text);
+
+                if (codigo != -1)
+                {
+                    var listaSeries = mv.SerieActores(codigo);
+                    string mensaje = string.Join("\n", listaSeries);
+                    GetCodigoSerie.Text = "";
+                    await ShowMessage("Information", mensaje);
+                }
+            }
+            else
+            {
+                await ShowMessage("Error", "Ingrese un Codigo");
+            }
+        }
+
+
+        private void AsociarDisociarSerieActor(object? sender, RoutedEventArgs e)
+        {
+            var ventan = new WindowComodin(new AsociarDisociarSerieActor());
+            ventan.DataContext = this.DataContext;
+            ventan.Show();
         }
     }
 }

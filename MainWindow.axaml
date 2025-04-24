@@ -2,14 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="using:corte2"
-        xmlns:local="MainViewModel"
+        xmlns:models="clr-namespace:corte2.Models"
         x:Class="corte2.MainWindow"
-        x:DataType="vm:MainViewModel"
+        x:DataType="models:MainViewModel"
         x:CompileBindings="True"
         Background="#c43a4c60"
         mc:Ignorable="d"
-        Width="1100"
+        Width="1600"
         Height="850"
         CornerRadius="5"
         Title="corte2">
@@ -116,12 +115,12 @@
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="*" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="*" />
-                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*" />
-                <DataGridTextColumn Header="Serie" Binding="{Binding Serie}" Width="*" />
-                <DataGridTextColumn Header="Edad" Binding="{Binding Edad}" Width="*" />
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="1*" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="3*" />
+                <DataGridTextColumn Header="URL IMDB" Binding="{Binding URLIMDB}" Width="3*" />
+                <DataGridTextColumn Header="Pais" Binding="{Binding Pais}" Width="2*" />
+                <DataGridTextColumn Header="Edad" Binding="{Binding Edad}" Width="1*" />
+                <DataGridTextColumn Header="Grammys" Binding="{Binding Grammy}" Width="2*" />
 
                 <!-- Columna con boton editar -->
                 <DataGridTemplateColumn Header="Editar" Width="auto">
@@ -171,12 +170,13 @@
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="*" />
-                <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" Width="*" />
-                <DataGridTextColumn Header="Genero" Binding="{Binding Genero}" Width="*" />
-                <DataGridTextColumn Header="Año" Binding="{Binding Año}" Width="*" />
-                <DataGridTextColumn Header="Plataforma" Binding="{Binding Plataforma}" Width="*" />
-                <DataGridTextColumn Header="Temporada" Binding="{Binding Temporadas}" Width="*" />
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="1*" />
+                <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" Width="2*" />
+                <DataGridTextColumn Header="Url Imdb" Binding="{Binding URLIMDB}" Width="1*" />
+                <DataGridTextColumn Header="Año Estreno" Binding="{Binding AnioEstreno}" Width="1*" />
+                <DataGridTextColumn Header="Genero" Binding="{Binding Genero}" Width="2*" />
+                <DataGridTextColumn Header="Temporada" Binding="{Binding Temporada}" Width="1*" />
+
 
                 <!-- Columnas con boton editar y eliminar del datagrid -->
                 <DataGridTemplateColumn Header="Editar" Width="auto">
@@ -330,7 +330,7 @@
 
 
         <!--opciones para series-->
-        
+
         <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="40,*" x:Name="GridSeries" IsVisible="False">
 
             <!-- Texto de las opciones-->
@@ -399,7 +399,7 @@
                             BorderThickness="1"
                             CornerRadius="20"
                             Padding="10,5"
-                            Click="Detalle_Actor_Click">
+                            Click="Detalle_Serie_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Spacing="8">
                             <Image Source="avares://corte2/Assets/detalle.png" Width="20" Height="20" />
@@ -435,7 +435,7 @@
                             BorderThickness="1"
                             CornerRadius="20"
                             Padding="10,5"
-                            Click="Adicionar_Actor_Click">
+                            Click="Adicionar_Serie_Click">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Spacing="8">
                             <Image Source="avares://corte2/Assets/adicionar.png" Width="20" Height="20" />
@@ -448,20 +448,20 @@
                             BorderThickness="1"
                             CornerRadius="20"
                             Padding="10,5"
-                            Click="Adicionar_Actor_Click">
+                            Click="AsociarDisociarSerieActor">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Spacing="8">
                             <Image Source="avares://corte2/Assets/asociar.png" Width="20" Height="20" />
                             <TextBlock Text="Asociar" Foreground="White" FontSize="14" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    
+
                     <!-- Botón Disociar -->
                     <Button Width="120" Height="40" Background="Transparent" BorderBrush="Gray"
                             BorderThickness="1"
                             CornerRadius="20"
                             Padding="10,5"
-                            Click="Adicionar_Actor_Click">
+                            Click="AsociarDisociarSerieActor">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                                     VerticalAlignment="Center" Spacing="8">
                             <Image Source="avares://corte2/Assets/disociar.png" Width="20" Height="20" />

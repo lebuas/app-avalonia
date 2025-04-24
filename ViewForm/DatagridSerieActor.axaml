@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+             xmlns:vm="clr-namespace:corte2.Models"
+             x:DataType="vm:MainViewModel"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="600"
+             x:Class="corte2.ViewForm.DatagridSerieActor">
+
+    <Grid ColumnDefinitions="*,*" Margin="10" RowDefinitions="Auto,Auto">
+
+        <!-- Títulos -->
+        <TextBlock Text="Series"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0 0 0 10"
+                   Grid.Column="0" />
+
+        <TextBlock Text="Actores"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0 0 0 10"
+                   Grid.Row="0" Grid.Column="1" />
+
+        <!-- DataGrid Series -->
+        <DataGrid ItemsSource="{Binding Series}"
+                  Background="#101210"
+                  AutoGenerateColumns="False"
+                  Height="300"
+                  Grid.Column="0"
+                  Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="100" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Titulo}" Width="300" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- DataGrid Actores -->
+        <DataGrid ItemsSource="{Binding Actores}"
+                  AutoGenerateColumns="False"
+                  Background="#101210"
+                  Height="300"
+                  Grid.Column="1"
+                  Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Codigo}" Width="100" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="300" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

@@ -1,46 +1,60 @@
+/*
+ Sistema de Gestión de Actores y Serie
+ Integrante1: Leymar Buenaventura Asprilla
+ Integrante2: Juan Gernando Cano
+ Integrante3: 
+ * 
+ */
+
+using System.Collections.Generic;
+using System;
+
 namespace corte2.Models;
 
-// Clase Actor
+//Datos del actor o actriz
 public class Actor
 {
     public int Codigo { get; set; }
     public string Nombre { get; set; }
-    public string Apellido { get; set; }
-    public string Rol { get; set; }
-    public string Serie { get; set; }
-    public string Edad { get; set; }
+    public string URLIMDB { get; set; }
+    public  string Pais { get; set; }
+    public int Edad { get; set; }
+    public int Grammy { get; set; }
 
-    // Constructor para inicializar las propiedades
-    public Actor(int codigo, string nombre, string apellido, string rol, string serie, string edad)
+
+    //Constructor
+    public Actor(int codigo, string nombre, string urlimdb, string pais, int edad, int grammy)
     {
-        Codigo = codigo;
-        Nombre = nombre;
-        Apellido = apellido;
-        Rol = rol;
-        Serie = serie;
-        Edad = edad;
+        this.Codigo = codigo;
+        this.Nombre = nombre;
+        this.URLIMDB = "https://www.imdb.com/name/" + urlimdb;
+        this.Pais = pais;
+        this.Edad = edad;
+        this.Grammy = grammy;
     }
 }
 
-// Clase Serie
+//Datos de la serie de televisión
 public class Serie
 {
-    
     public int Codigo { get; set; }
     public string Titulo { get; set; }
+    public string URLIMDB { get; set; }
+    public int AnioEstreno { get; set; }
     public string Genero { get; set; }
-    public string Año { get; set; }
-    public string Plataforma { get; set; }
-    public string Temporadas { get; set; }
+    public int Temporada { get; set; }
 
-    // Constructor para inicializar las propiedades
-    public Serie(int codigo, string titulo, string genero, string año, string plataforma, string temporadas)
+    //Listado de códigos de actores que actúan en la serie
+    public List<int> Actor = [];
+
+    //Constructor
+    public Serie(int codigo, string titulo, string urlimdb, int anioEstreno, string genero, int temporada)
     {
-        Codigo = codigo;
-        Titulo = titulo;
-        Genero = genero;
-        Año = año;
-        Plataforma = plataforma;
-        Temporadas = temporadas;
+        this.Codigo = codigo;
+        this.Titulo = titulo;
+        this.URLIMDB = "https://www.imdb.com/title/" + urlimdb;
+        this.AnioEstreno = anioEstreno;
+        this.Genero = genero;
+        this.Temporada = temporada;
     }
 }

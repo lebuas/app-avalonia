@@ -2,10 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="500"
-             x:Class="corte2.ViewForm.FormActors.AdicionarActors">
-
-
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             x:Class="corte2.ViewForm.FormSeries.AdicionarSerie">
+    
     <StackPanel Margin="20">
         <!-- Nota / Mensaje de acción -->
         <TextBlock
@@ -13,28 +12,28 @@
             Foreground="White"
             FontStyle="Italic"
             FontSize="14"
-            Text="Formulario Para Ingresar un Actor o Actriz"
+            Text="Formulario Para Registrar una Serie"
             HorizontalAlignment="Center" />
 
         <!-- Campos -->
         <TextBlock Margin="0 5">Código:</TextBlock>
         <TextBox Name="CodigoTextBox" Watermark="Ingresa un Código" />
 
-        <TextBlock Margin="0 5">Nombre:</TextBlock>
-        <TextBox Name="NombreTextBox" Watermark="Ingresa un Nombre" />
+        <TextBlock Margin="0 5">Titulo:</TextBlock>
+        <TextBox Name="NombreTextBox" Watermark="Ingresa Titulo de la serie" />
 
         <TextBlock Margin="0 5">URL IMDB:</TextBlock>
         <TextBox Name="UrlTextBox" Watermark="Ingrese un IMDB" />
         
-        <TextBlock Margin="0 5">Pais:</TextBlock>
-        <TextBox Name="PaisTextBox" Watermark="Ingresa un Pais" />
+        <TextBlock Margin="0 5">Año de Estreno:</TextBlock>
+        <TextBox Name="AnioEstrenoTextBox" Watermark="Ingrese un Año de Estreno" />
         
         
-        <TextBlock Margin="0 5">Edat:</TextBlock>
-        <TextBox Name="EdadTextBox" Watermark="Ingresa una edad" />
+        <TextBlock Margin="0 5">Genero:</TextBlock>
+        <TextBox Name="GeneroTextBox" Watermark="Ingrese in Genero" />
 
-        <TextBlock Margin="0 5">Grammy:</TextBlock>
-        <TextBox Name="GramyTextBox" Watermark="Ingrese # Grammys que ha Ganado " />
+        <TextBlock Margin="0 5">Temporada:</TextBlock>
+        <TextBox Name="TemporadaTextBox" Watermark="Ingrese # Temporadas " />
         
 
         <!-- Botones -->
@@ -74,6 +73,5 @@
             </Button>
         </StackPanel>
     </StackPanel>
-
 
 </UserControl>

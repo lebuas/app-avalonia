@@ -35,10 +35,6 @@
       <UpToDateCheckInput Remove="FormularyActors\Buscar.axaml" />
       <UpToDateCheckInput Remove="FormularyActors\Editar.axaml" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ViewForm\FormSeries\" />
-    </ItemGroup>
     
 </Project>
 
