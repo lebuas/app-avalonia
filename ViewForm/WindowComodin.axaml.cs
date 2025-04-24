@@ -8,8 +8,6 @@ public partial class WindowComodin : Window
     public WindowComodin(UserControl view)
     {
         InitializeComponent();
-        var ventana = this.GetVisualRoot() as Window;
-        ventana.Close();
         UpdateUserControl(view);
     }
 
