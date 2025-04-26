@@ -496,7 +496,7 @@
                        Margin="0,10" />
             <StackPanel Grid.Row="2" HorizontalAlignment="Center">
                 <TextBlock Text="Integrantes:" Foreground="White"></TextBlock>
-                <TextBlock Text="Leymar Buenventura Asprilla" Foreground="White"></TextBlock>
+                <TextBlock Text="Leymar Buenaventura Asprilla" Foreground="White"></TextBlock>
                 <TextBlock Text="Juan Fernando Cano Aguilar" Foreground="White"></TextBlock>
                 <TextBlock Text="Andres Felipe Martinez" Foreground="White"></TextBlock>
             </StackPanel>

@@ -17,6 +17,7 @@ public partial class AsociarDisociarSerieActor : UserControl
             UpdateDataGrid();
             AsociarForm.IsVisible = true;
         }
+
         if (evento == "D")
         {
             UpdateDataGrid();
@@ -34,9 +35,9 @@ public partial class AsociarDisociarSerieActor : UserControl
 
     async void AsociarSerieClick(object? sender, RoutedEventArgs e)
     {
-        AsociarForm.IsVisible = true;
         var textoActor = CodigoActorTextBox.Text;
         var textoSerie = CodigoSerieTextBox.Text;
+
         if (textoSerie != null && textoActor != null)
         {
             if ((int.TryParse(textoActor, out int codigoActor)) & (int.TryParse(textoSerie, out int codigoSerie)))
@@ -59,8 +60,12 @@ public partial class AsociarDisociarSerieActor : UserControl
             }
             else
             {
-                await ShowMessage("Información", "Ingrese códigos de Actor y Serie");
+                await ShowMessage("Error", "Los códigos deben ser numero enteros");
             }
+        }
+        else
+        {
+            await ShowMessage("Información", "Ingrese códigos de Actor y Serie");
         }
     }
 
@@ -87,6 +92,10 @@ public partial class AsociarDisociarSerieActor : UserControl
                 {
                     await ShowMessage("Error", "Actor no esta registrado o No trabaja en serie.");
                 }
+            }
+            else
+            {
+                await ShowMessage("Error", "Los códigos deben ser numero enteros");
             }
         }
         else

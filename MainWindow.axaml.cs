@@ -176,6 +176,11 @@ namespace corte2
                         GetCodigoActor.Text = null;
                     }
                 }
+                else
+                {
+                    await ShowMessage("Información", "El código tiene que se un número entero");
+                    GetCodigoActor.Text = null;
+                }
             }
             else
             {
@@ -207,6 +212,11 @@ namespace corte2
                         await ShowMessage("Información", "No se encontró la Serie");
                         GetCodigoSerie.Text = null;
                     }
+                }
+                else
+                {
+                    await ShowMessage("Información", "El codigo tiene que ser un numero entero");
+                    GetCodigoSerie.Text = null;
                 }
             }
             else
@@ -245,8 +255,10 @@ namespace corte2
                     var listaSeries = mv.ActorTrabaja(codigo);
                     string mensaje = string.Join("\n", listaSeries);
                     GetCodigoActor.Text = null;
-                    await ShowMessage($"Series:", mensaje);
+                    await ShowMessage("Series:", mensaje);
                 }
+
+                GetCodigoActor.Text = null;
             }
             else
             {
@@ -265,11 +277,21 @@ namespace corte2
 
                 if (codigo != -1)
                 {
-                    var listaSeries = mv.SerieActores(codigo);
-                    string mensaje = string.Join("\n", listaSeries);
-                    GetCodigoSerie.Text = null;
-                    await ShowMessage("Actores", mensaje);
+                    if (mv.PosSerie(codigo) >=0)
+                    {
+                        var listaSeries = mv.SerieActores(codigo);
+                        string mensaje = string.Join("\n", listaSeries);
+                        GetCodigoSerie.Text = null;
+                        await ShowMessage("Actores", mensaje);
+                    }
+                    else
+                    {
+                        await ShowMessage("Información", "No se encontro la Serie");
+                        GetCodigoSerie.Text = null;
+                    }
                 }
+
+                GetCodigoSerie.Text = null;
             }
             else
             {
