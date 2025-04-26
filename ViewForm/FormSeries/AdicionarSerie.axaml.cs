@@ -65,12 +65,12 @@ namespace corte2.ViewForm.FormSeries
             {
                 await ShowMessage("Éxito", $"Serie '{titulo}' agregada correctamente.");
                 // Limpiar campos
-                CodigoTextBox.Text = "";
-                NombreTextBox.Text = "";
-                UrlTextBox.Text = "";
-                AnioEstrenoTextBox.Text = "";
-                GeneroTextBox.Text = "";
-                TemporadaTextBox.Text = "";
+                CodigoTextBox.Text = null;
+                NombreTextBox.Text = null;
+                UrlTextBox.Text = null;
+                AnioEstrenoTextBox.Text = null;
+                GeneroTextBox.Text = null;
+                TemporadaTextBox.Text = null;
             }
         }
 

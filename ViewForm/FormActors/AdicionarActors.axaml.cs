@@ -73,12 +73,12 @@ public partial class AdicionarActors : UserControl
             await ShowMessage("Éxito", $"Actor con código '{codigo}' agregado correctamente.");
 
             // Limpiar formulario
-            CodigoTextBox.Text = "";
-            NombreTextBox.Text = "";
-            PaisTextBox.Text = "";
-            UrlTextBox.Text = "";
-            EdadTextBox.Text = "";
-            GramyTextBox.Text = "";
+            CodigoTextBox.Text = null;
+            NombreTextBox.Text = null;
+            PaisTextBox.Text = null;
+            UrlTextBox.Text = null;
+            EdadTextBox.Text = null;
+            GramyTextBox.Text = null;
         }
     }
     

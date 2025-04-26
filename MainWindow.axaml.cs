@@ -168,12 +168,12 @@ namespace corte2
                         vm.Actores.Insert(0, actor);
                         var index = vm.Actores.IndexOf(actor);
                         DataGridActores.SelectedIndex = index;
-                        GetCodigoActor.Text = "";
+                        GetCodigoActor.Text = null;
                     }
                     else
                     {
                         await ShowMessage("Búsqueda", "No se encontró el Actor");
-                        GetCodigoActor.Text = "";
+                        GetCodigoActor.Text = null;
                     }
                 }
             }
@@ -200,12 +200,12 @@ namespace corte2
                         vm.Series.Insert(0, serie);
                         var index = vm.Series.IndexOf(serie);
                         DataGridSeries.SelectedIndex = index;
-                        GetCodigoSerie.Text = "";
+                        GetCodigoSerie.Text = null;
                     }
                     else
                     {
                         await ShowMessage("Información", "No se encontró la Serie");
-                        GetCodigoSerie.Text = "";
+                        GetCodigoSerie.Text = null;
                     }
                 }
             }
@@ -244,7 +244,7 @@ namespace corte2
                 {
                     var listaSeries = mv.ActorTrabaja(codigo);
                     string mensaje = string.Join("\n", listaSeries);
-                    GetCodigoActor.Text = "";
+                    GetCodigoActor.Text = null;
                     await ShowMessage($"Series:", mensaje);
                 }
             }
@@ -267,7 +267,7 @@ namespace corte2
                 {
                     var listaSeries = mv.SerieActores(codigo);
                     string mensaje = string.Join("\n", listaSeries);
-                    GetCodigoSerie.Text = "";
+                    GetCodigoSerie.Text = null;
                     await ShowMessage("Actores", mensaje);
                 }
             }

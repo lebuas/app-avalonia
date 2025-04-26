@@ -49,8 +49,8 @@ public partial class AsociarDisociarSerieActor : UserControl
                     await ShowMessage("Información",
                         $"Operación exitosa: Actor:{codigoActor} Asociado con Serie:{codigoSerie}");
 
-                    CodigoActorTextBox.Text = "";
-                    CodigoSerieTextBox.Text = "";
+                    CodigoActorTextBox.Text = null;
+                    CodigoSerieTextBox.Text = null;
                 }
                 else
                 {
@@ -80,8 +80,8 @@ public partial class AsociarDisociarSerieActor : UserControl
                 {
                     await ShowMessage("Información",
                         $"Operación exitosa: Actor:{codigoActor} Disociado de Serie:{codigoSerie}");
-                    CodigoActorTextBox.Text = "";
-                    CodigoSerieTextBox.Text = "";
+                    CodigoActorTextBox.Text = null;
+                    CodigoSerieTextBox.Text = null;
                 }
                 else
                 {

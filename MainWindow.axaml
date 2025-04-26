@@ -489,7 +489,7 @@
             </Grid.RowDefinitions>
 
             <!-- Título -->
-            <TextBlock Grid.Row="0" Text="GESTOR DE SERIES. ACTORES y ACTRICES"
+            <TextBlock Grid.Row="0" Text="GESTOR DE SERIES, ACTORES y ACTRICES"
                        HorizontalAlignment="Center"
                        FontSize="24"
                        Foreground="White"
