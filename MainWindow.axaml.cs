@@ -10,7 +10,6 @@ using corte2.ViewForm.FormActors;
 using corte2.ViewForm.FormSeries;
 using MsBox.Avalonia;
 
-
 namespace corte2
 {
     public partial class MainWindow : Window
@@ -21,17 +20,16 @@ namespace corte2
             DataContext = new MainViewModel();
         }
 
-        // Metodo para enviar los mesajes flotantes
+        // Muestra un mensaje emergente
         private async Task ShowMessage(string title, string message)
         {
             var box = MessageBoxManager.GetMessageBoxStandard(title, message);
             await box.ShowAsync();
         }
 
-        // Al hacer clic en el botón Actors, se abrirá el menú emergente (Popup)
+        // Muestra la vista de actores y oculta las demás
         private void OnActorsClick(object sender, RoutedEventArgs e)
         {
-            // Mostrar las opciones de actores y ocultar las de series
             Home.IsVisible = false;
             DataGridSeries.IsVisible = false;
             GridSeries.IsVisible = false;
@@ -39,10 +37,9 @@ namespace corte2
             GridActors.IsVisible = true;
         }
 
-
+        // Muestra la vista de series y oculta las demás
         private void OnSeriesClick(object sender, RoutedEventArgs e)
         {
-            // Mostrar las opciones de series y ocultar las de actores
             Home.IsVisible = false;
             DataGridActores.IsVisible = false;
             GridActors.IsVisible = false;
@@ -50,34 +47,31 @@ namespace corte2
             GridSeries.IsVisible = true;
         }
 
-
+        // Muestra la vista de inicio
         private void OnHomeClik(object? sender, RoutedEventArgs e)
         {
             Home.IsVisible = true;
         }
 
-
+        // Cierra la ventana principal
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-
-        // Abre la página del repositorio del proyecto
+        // Abre el repositorio de GitHub en el navegador
         private void GithubClick(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://github.com/lebuas")
             {
-                UseShellExecute = true // Es necesario para abrir el navegador
+                UseShellExecute = true
             });
         }
 
-        private void OnInfoClick(object? sender, RoutedEventArgs e)
-        {
-            //
-        }
+        // Evento vacío para información
+        private void OnInfoClick(object? sender, RoutedEventArgs e) { }
 
-
+        // Habilita edición de actores
         private void Editar_Actor_Click(object? sender, RoutedEventArgs e)
         {
             DataGridActores.IsReadOnly = false;
@@ -85,6 +79,7 @@ namespace corte2
             ButtonBloquearEdicionActores.IsVisible = true;
         }
 
+        // Habilita edición de series
         private void Editar_Serie_Click(object? sender, RoutedEventArgs e)
         {
             DataGridSeries.IsReadOnly = false;
@@ -92,19 +87,21 @@ namespace corte2
             ButtonBloquearEdicionSeries.IsVisible = true;
         }
 
+        // Bloquea edición de actores
         private void Bloquear_Edicion_Actor_Click(object? sender, RoutedEventArgs e)
         {
             DataGridActores.IsReadOnly = true;
             ButtonBloquearEdicionActores.IsVisible = false;
         }
 
+        // Bloquea edición de series
         private void Bloquear_Edicion_Serie_Click(object? sender, RoutedEventArgs e)
         {
             DataGridSeries.IsReadOnly = true;
             ButtonBloquearEdicionSeries.IsVisible = false;
         }
 
-
+        // Elimina un actor del listado
         async void Eliminar_Actor_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.DataContext is Actor actor)
@@ -113,11 +110,12 @@ namespace corte2
                 if (vm != null)
                 {
                     vm.Actores.Remove(actor);
-                    await ShowMessage("Title", ($"Actor: {actor.Codigo} - {actor.Nombre} Eliminado"));
+                    await ShowMessage("Eliminación", $"Actor: {actor.Codigo} - {actor.Nombre} Eliminado");
                 }
             }
         }
 
+        // Elimina una serie del listado
         async void Eliminar_Serie_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.DataContext is Serie serie)
@@ -126,39 +124,29 @@ namespace corte2
                 if (vm != null)
                 {
                     vm.Series.Remove(serie);
-                    var message = MessageBoxManager.GetMessageBoxStandard(
-                        "Title",
-                        ($"Serie: {serie.Codigo} {serie.Titulo} Eliminado")
-                    );
-                    await message.ShowAsync();
+                    await ShowMessage("Eliminación", $"Serie: {serie.Codigo} {serie.Titulo} Eliminado");
                 }
             }
         }
 
-
+        // Valida que un texto sea numérico y lo retorna como entero
         async Task<int> ValidarCodigo(string texto)
         {
             if (int.TryParse(texto, out int codigo))
-            {
                 return codigo;
-            }
-
 
             await ShowMessage("Error", "El Código tiene que ser un número.");
             return -1;
         }
 
-
+        // Busca un actor por código
         async void Buscar_Actor_Click(object? sender, RoutedEventArgs e)
         {
-            // Obtener el texto del TextBox
             var vm = this.DataContext as MainViewModel;
             string texto = GetCodigoActor.Text!;
 
-            //convertir el texto del TextBox a un número
             if (int.TryParse(texto, out int codigo))
             {
-                // Buscar el actor con el código especificado
                 var actor = vm!.Actores.FirstOrDefault(c => c.Codigo == codigo);
 
                 if (actor != null)
@@ -171,47 +159,37 @@ namespace corte2
                 }
                 else
                 {
-                    var message = MessageBoxManager.GetMessageBoxStandard(
-                        "Title",
-                        "No se encontro el Actor"
-                    );
-                    await message.ShowAsync();
+                    await ShowMessage("Búsqueda", "No se encontró el Actor");
                 }
             }
         }
 
+        // Busca una serie por código
         async void Buscar_Serie_Click(object? sender, RoutedEventArgs e)
         {
-            // Obtener el texto del TextBox
             var vm = this.DataContext as MainViewModel;
             string texto = GetCodigoSerie.Text!;
 
-            //convertir el texto del TextBox a un número
             if (int.TryParse(texto, out int codigo))
             {
-                // Buscar el actor con el código especificado
-                var Serie = vm.Series.FirstOrDefault(c => c.Codigo == codigo);
+                var serie = vm.Series.FirstOrDefault(c => c.Codigo == codigo);
 
-                if (Serie != null)
+                if (serie != null)
                 {
-                    vm.Series.Remove(Serie);
-                    vm.Series.Insert(0, Serie);
-                    var index = vm.Series.IndexOf(Serie);
+                    vm.Series.Remove(serie);
+                    vm.Series.Insert(0, serie);
+                    var index = vm.Series.IndexOf(serie);
                     DataGridSeries.SelectedIndex = index;
                     GetCodigoSerie.Text = "";
                 }
                 else
                 {
-                    var message = MessageBoxManager.GetMessageBoxStandard(
-                        "Title",
-                        "No se encontró la Serie"
-                    );
-                    await message.ShowAsync();
+                    await ShowMessage("Búsqueda", "No se encontró la Serie");
                 }
             }
         }
 
-        // Abre la ventana Comodin que llama al UseControl que contiene el formulario
+        // Abre la ventana para adicionar un nuevo actor
         private void Adicionar_Actor_Click(object? sender, RoutedEventArgs e)
         {
             var ventan = new WindowComodin(new AdicionarActors());
@@ -219,7 +197,7 @@ namespace corte2
             ventan.Show();
         }
 
-
+        // Abre la ventana para adicionar una nueva serie
         private void Adicionar_Serie_Click(object? sender, RoutedEventArgs e)
         {
             var ventana = new WindowComodin(new AdicionarSerie());
@@ -227,6 +205,7 @@ namespace corte2
             ventana.Show();
         }
 
+        // Muestra detalle de las series en que trabaja un actor
         private async void Detalle_Actor_Click(object? sender, RoutedEventArgs e)
         {
             var mv = DataContext as MainViewModel;
@@ -240,17 +219,17 @@ namespace corte2
                     var listaSeries = mv.ActorTrabaja(codigo);
                     string mensaje = string.Join("\n", listaSeries);
                     GetCodigoSerie.Text = "";
-                    await ShowMessage("Information", mensaje);
+                    await ShowMessage("Información", mensaje);
                 }
             }
             else
             {
-                await ShowMessage("Error", "Ingrese un codigo");
+                await ShowMessage("Error", "Ingrese un código");
             }
         }
 
+        // Muestra detalle de los actores que trabajan en una serie
         private async void Detalle_Serie_Click(object? sender, RoutedEventArgs e)
-
         {
             var mv = DataContext as MainViewModel;
 
@@ -263,16 +242,16 @@ namespace corte2
                     var listaSeries = mv.SerieActores(codigo);
                     string mensaje = string.Join("\n", listaSeries);
                     GetCodigoSerie.Text = "";
-                    await ShowMessage("Information", mensaje);
+                    await ShowMessage("Información", mensaje);
                 }
             }
             else
             {
-                await ShowMessage("Error", "Ingrese un Codigo");
+                await ShowMessage("Error", "Ingrese un código");
             }
         }
 
-
+        // Abre la ventana de asociación entre series y actores
         private void AsociarDisociarSerieActor(object? sender, RoutedEventArgs e)
         {
             var ventan = new WindowComodin(new AsociarDisociarSerieActor());
