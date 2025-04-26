@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using corte2.Models;
 using corte2.ViewForm;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using corte2.ViewForm.FormActors;
 using corte2.ViewForm.FormSeries;
