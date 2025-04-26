@@ -30,7 +30,7 @@
         <TextBox Name="PaisTextBox" Watermark="Ingresa un Pais" />
         
         
-        <TextBlock Margin="0 5">Edat:</TextBlock>
+        <TextBlock Margin="0 5">Edad:</TextBlock>
         <TextBox Name="EdadTextBox" Watermark="Ingresa una edad" />
 
         <TextBlock Margin="0 5">Grammy:</TextBlock>

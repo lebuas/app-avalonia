@@ -190,4 +190,35 @@ public class MainViewModel
 
         return false;
     }
+    
+    		//Chequea si el actor está trabajando en alguna serie
+		public bool ActorEnSerie(int codigoActor) {
+			for (int cont = 0; cont < Series.Count; cont++)
+				for (int num = 0; num < Series[cont].Actor.Count; num++)
+					if (Series[cont].Actor[num] == codigoActor)
+						return true;
+			return false;
+		}
+    
+    		//Borrar actor, si y solo si no está trabajando en alguna serie
+		public bool ActorBorra(int codigoActor) {
+			if (ActorEnSerie(codigoActor) == false) {
+				for (int cont = 0; cont < Actores.Count; cont++)
+					if (Actores[cont].Codigo == codigoActor) {
+						Actores.RemoveAt(cont);
+						return true;
+					}
+			}
+			return false;
+		}
+        
+        		//Borrar serie
+		public bool SerieBorra(int codigoSerie) {
+			for (int cont = 0; cont < Series.Count; cont++)
+				if (Series[cont].Codigo == codigoSerie) {
+					Series.RemoveAt(cont);
+					return true;
+				}
+			return false;
+		}
 }

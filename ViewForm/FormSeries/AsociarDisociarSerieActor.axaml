@@ -12,22 +12,23 @@
         <!-- Primera fila: Formulario -->
         <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="10">
 
-            <!-- Fila: Código de Actor -->
-            <StackPanel Orientation="Horizontal" Spacing="10">
-                <TextBlock Text="Código Actor:" VerticalAlignment="Center" />
-                <TextBox Width="200" Name="CodigoActorTextBox" />
-            </StackPanel>
-
             <!-- Fila: Código de Serie -->
             <StackPanel Orientation="Horizontal" Spacing="10">
                 <TextBlock Text="Código Serie:" VerticalAlignment="Center" />
                 <TextBox Width="200" Name="CodigoSerieTextBox" />
             </StackPanel>
 
+            <!-- Fila: Código de Actor -->
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Código Actor:" VerticalAlignment="Center" />
+                <TextBox Width="200" Name="CodigoActorTextBox" />
+            </StackPanel>
+
+
             <!-- Fila: Botones -->
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <Button Click="AsociarSerieClick" Content="Asociar" Width="100" Background="Green" Foreground="White" />
-                <Button Click="DisociarSerieClick" Content="Disociar" Width="100" Background="Red" Foreground="White" />
+                <Button x:Name="AsociarForm" Click="AsociarSerieClick" Content="Asociar" Width="100" Background="Green" Foreground="White" IsVisible="False"/>
+                <Button x:Name="DisociarFrom" Click="DisociarSerieClick" Content="Disociar" Width="100" Background="Red" Foreground="White" IsVisible="False"/>
                 <Button Click="Salir" Content="Salir" Width="100" Background="Blue" Foreground="White" />
             </StackPanel>
 

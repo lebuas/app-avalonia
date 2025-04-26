@@ -69,22 +69,28 @@ namespace corte2
         }
 
         // Evento vacío para información
-        private void OnInfoClick(object? sender, RoutedEventArgs e) { }
+        private void OnInfoClick(object? sender, RoutedEventArgs e)
+        {
+        }
 
         // Habilita edición de actores
-        private void Editar_Actor_Click(object? sender, RoutedEventArgs e)
+        async void Editar_Actor_Click(object? sender, RoutedEventArgs e)
         {
             DataGridActores.IsReadOnly = false;
             DataGridActores.Columns[0].IsReadOnly = true;
             ButtonBloquearEdicionActores.IsVisible = true;
+            await ShowMessage("Información",
+                "Esta disponible la edición en pantalla.\nDar doble clic sobre el campo que desea Editar de la tabla.\nNo olvide darle al boton Actualizar cuando termine de editar ");
         }
 
         // Habilita edición de series
-        private void Editar_Serie_Click(object? sender, RoutedEventArgs e)
+        async void Editar_Serie_Click(object? sender, RoutedEventArgs e)
         {
             DataGridSeries.IsReadOnly = false;
             DataGridSeries.Columns[0].IsReadOnly = true;
             ButtonBloquearEdicionSeries.IsVisible = true;
+            await ShowMessage("Información",
+                "Esta disponible la edición en pantalla.\nDar doble clic sobre el campo que desea editar de la tabla.\nNo olvide darle al boton Actualizar cuando termine de editar ");
         }
 
         // Bloquea edición de actores
@@ -109,8 +115,12 @@ namespace corte2
                 var vm = this.DataContext as MainViewModel;
                 if (vm != null)
                 {
-                    vm.Actores.Remove(actor);
-                    await ShowMessage("Eliminación", $"Actor: {actor.Codigo} - {actor.Nombre} Eliminado");
+                    var resutaldo = vm.ActorBorra(actor.Codigo);
+                    if (!resutaldo)
+                    {
+                        await ShowMessage("Error",
+                            "No se puede eliminar el Actor/Actirz porque esta trabajando en una serie");
+                    }
                 }
             }
         }
@@ -123,8 +133,11 @@ namespace corte2
                 var vm = this.DataContext as MainViewModel;
                 if (vm != null)
                 {
-                    vm.Series.Remove(serie);
-                    await ShowMessage("Eliminación", $"Serie: {serie.Codigo} {serie.Titulo} Eliminado");
+                    var resultado = vm.SerieBorra(serie.Codigo);
+                    if (!resultado)
+                    {
+                        await ShowMessage("Error", "Hubo un problema al eliminar la serie");
+                    }
                 }
             }
         }
@@ -143,24 +156,31 @@ namespace corte2
         async void Buscar_Actor_Click(object? sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as MainViewModel;
-            string texto = GetCodigoActor.Text!;
-
-            if (int.TryParse(texto, out int codigo))
+            string texto = GetCodigoActor.Text;
+            if (texto != null)
             {
-                var actor = vm!.Actores.FirstOrDefault(c => c.Codigo == codigo);
+                if (int.TryParse(texto, out int codigo))
+                {
+                    var actor = vm!.Actores.FirstOrDefault(c => c.Codigo == codigo);
 
-                if (actor != null)
-                {
-                    vm.Actores.Remove(actor);
-                    vm.Actores.Insert(0, actor);
-                    var index = vm.Actores.IndexOf(actor);
-                    DataGridActores.SelectedIndex = index;
-                    GetCodigoActor.Text = "";
+                    if (actor != null)
+                    {
+                        vm.Actores.Remove(actor);
+                        vm.Actores.Insert(0, actor);
+                        var index = vm.Actores.IndexOf(actor);
+                        DataGridActores.SelectedIndex = index;
+                        GetCodigoActor.Text = "";
+                    }
+                    else
+                    {
+                        await ShowMessage("Búsqueda", "No se encontró el Actor");
+                        GetCodigoActor.Text = "";
+                    }
                 }
-                else
-                {
-                    await ShowMessage("Búsqueda", "No se encontró el Actor");
-                }
+            }
+            else
+            {
+                await ShowMessage("Información", "Ingrese un Código de Actor");
             }
         }
 
@@ -168,24 +188,31 @@ namespace corte2
         async void Buscar_Serie_Click(object? sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as MainViewModel;
-            string texto = GetCodigoSerie.Text!;
-
-            if (int.TryParse(texto, out int codigo))
+            string texto = GetCodigoSerie.Text;
+            if (texto != null)
             {
-                var serie = vm.Series.FirstOrDefault(c => c.Codigo == codigo);
+                if (int.TryParse(texto, out int codigo))
+                {
+                    var serie = vm.Series.FirstOrDefault(c => c.Codigo == codigo);
 
-                if (serie != null)
-                {
-                    vm.Series.Remove(serie);
-                    vm.Series.Insert(0, serie);
-                    var index = vm.Series.IndexOf(serie);
-                    DataGridSeries.SelectedIndex = index;
-                    GetCodigoSerie.Text = "";
+                    if (serie != null)
+                    {
+                        vm.Series.Remove(serie);
+                        vm.Series.Insert(0, serie);
+                        var index = vm.Series.IndexOf(serie);
+                        DataGridSeries.SelectedIndex = index;
+                        GetCodigoSerie.Text = "";
+                    }
+                    else
+                    {
+                        await ShowMessage("Información", "No se encontró la Serie");
+                        GetCodigoSerie.Text = "";
+                    }
                 }
-                else
-                {
-                    await ShowMessage("Búsqueda", "No se encontró la Serie");
-                }
+            }
+            else
+            {
+                await ShowMessage("Información", "Ingrese un Código de Serie");
             }
         }
 
@@ -218,13 +245,13 @@ namespace corte2
                 {
                     var listaSeries = mv.ActorTrabaja(codigo);
                     string mensaje = string.Join("\n", listaSeries);
-                    GetCodigoSerie.Text = "";
-                    await ShowMessage("Información", mensaje);
+                    GetCodigoActor.Text = "";
+                    await ShowMessage($"Series:", mensaje);
                 }
             }
             else
             {
-                await ShowMessage("Error", "Ingrese un código");
+                await ShowMessage("Información", "Ingrese un Código de Actor para ver en que series trabaja");
             }
         }
 
@@ -242,21 +269,31 @@ namespace corte2
                     var listaSeries = mv.SerieActores(codigo);
                     string mensaje = string.Join("\n", listaSeries);
                     GetCodigoSerie.Text = "";
-                    await ShowMessage("Información", mensaje);
+                    await ShowMessage("Actores", mensaje);
                 }
             }
             else
             {
-                await ShowMessage("Error", "Ingrese un código");
+                await ShowMessage("Error", "Ingrese un Código de Serie para ver que actores trabajan");
             }
         }
 
         // Abre la ventana de asociación entre series y actores
-        private void AsociarDisociarSerieActor(object? sender, RoutedEventArgs e)
+        private void AsociarDisociarSerieActor(string evento)
         {
-            var ventan = new WindowComodin(new AsociarDisociarSerieActor());
+            var ventan = new WindowComodin(new AsociarDisociarSerieActor(evento));
             ventan.DataContext = this.DataContext;
             ventan.Show();
+        }
+
+        private void AsociarSerieActor(object? sender, RoutedEventArgs e)
+        {
+            AsociarDisociarSerieActor("A");
+        }
+
+        private void DisociarSerieActor(object? sender, RoutedEventArgs e)
+        {
+            AsociarDisociarSerieActor("D");
         }
     }
 }

@@ -9,10 +9,19 @@ namespace corte2.ViewForm.FormSeries;
 
 public partial class AsociarDisociarSerieActor : UserControl
 {
-    public AsociarDisociarSerieActor()
+    public AsociarDisociarSerieActor(string evento)
     {
         InitializeComponent();
-        UpdateDataGrid();
+        if (evento == "A")
+        {
+            UpdateDataGrid();
+            AsociarForm.IsVisible = true;
+        }
+        if (evento == "D")
+        {
+            UpdateDataGrid();
+            DisociarFrom.IsVisible = true;
+        }
     }
 
 
@@ -25,22 +34,32 @@ public partial class AsociarDisociarSerieActor : UserControl
 
     async void AsociarSerieClick(object? sender, RoutedEventArgs e)
     {
+        AsociarForm.IsVisible = true;
         var textoActor = CodigoActorTextBox.Text;
         var textoSerie = CodigoSerieTextBox.Text;
-
-        if ((int.TryParse(textoActor, out int codigoActor)) & (int.TryParse(textoSerie, out int codigoSerie)))
+        if (textoSerie != null && textoActor != null)
         {
-            var vm = DataContext as MainViewModel;
-
-            var resultadoOperacion = vm!.SerieAsocia(codigoSerie, codigoActor);
-            if (resultadoOperacion)
+            if ((int.TryParse(textoActor, out int codigoActor)) & (int.TryParse(textoSerie, out int codigoSerie)))
             {
-                await ShowMessage("Informacion",
-                    $"$Operacion exitosa: Actor:{codigoActor} Asociado con Serie:{codigoSerie}");
+                var vm = DataContext as MainViewModel;
+
+                var resultadoOperacion = vm!.SerieAsocia(codigoSerie, codigoActor);
+                if (resultadoOperacion)
+                {
+                    await ShowMessage("Información",
+                        $"Operación exitosa: Actor:{codigoActor} Asociado con Serie:{codigoSerie}");
+
+                    CodigoActorTextBox.Text = "";
+                    CodigoSerieTextBox.Text = "";
+                }
+                else
+                {
+                    await ShowMessage("Información", "Actor no esta registrado o ya trabaja en la Serie.");
+                }
             }
             else
             {
-                await ShowMessage("Error", "Actor no no esta en la lista o ya esta en la serie.");
+                await ShowMessage("Información", "Ingrese códigos de Actor y Serie");
             }
         }
     }
@@ -50,20 +69,29 @@ public partial class AsociarDisociarSerieActor : UserControl
         var textoActor = CodigoActorTextBox.Text;
         var textoSerie = CodigoSerieTextBox.Text;
 
-        if ((int.TryParse(textoActor, out int codigoActor)) & (int.TryParse(textoSerie, out int codigoSerie)))
+        if (textoSerie != null && textoActor != null)
         {
-            var vm = DataContext as MainViewModel;
+            if ((int.TryParse(textoActor, out int codigoActor)) & (int.TryParse(textoSerie, out int codigoSerie)))
+            {
+                var vm = DataContext as MainViewModel;
 
-            var resultadoOperacion = vm!.SerieDisocia(codigoSerie, codigoActor);
-            if (resultadoOperacion)
-            {
-                await ShowMessage("Informacion",
-                    $"$Operacion exitosa: Actor:{codigoActor} Disociado de Serie:{codigoSerie}");
+                var resultadoOperacion = vm!.SerieDisocia(codigoSerie, codigoActor);
+                if (resultadoOperacion)
+                {
+                    await ShowMessage("Información",
+                        $"Operación exitosa: Actor:{codigoActor} Disociado de Serie:{codigoSerie}");
+                    CodigoActorTextBox.Text = "";
+                    CodigoSerieTextBox.Text = "";
+                }
+                else
+                {
+                    await ShowMessage("Error", "Actor no esta registrado o No trabaja en serie.");
+                }
             }
-            else
-            {
-                await ShowMessage("Error", "Actor no no esta en la lista o No esta en la serie.");
-            }
+        }
+        else
+        {
+            await ShowMessage("Información", "Ingrese códigos de Actor y Serie");
         }
     }
 
